@@ -8,6 +8,21 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+function fib() {
+  let cache = {};
 
-module.exports = fib;
+  return function fib_n(n) {
+    if (n in cache) {
+      return cache[n];
+    } else {
+      if (n < 2) {
+        return n;
+      } else {
+        cache[n] = fib_n(n - 1) + fib_n(n - 2);
+        return cache[n];
+      }
+    }
+  };
+}
+
+module.exports = fib();
